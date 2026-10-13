@@ -7,6 +7,7 @@
 ## Install gotcha
 
 - Turbo latest gives error, refer to this chat for install in any machine https://chatgpt.com/share/6acdfb62-5074-83e8-9282-587f31fd87c6  
+- Latest Turbo and NestJs uses different TypeScript version. it courses error. fix in monorepo
 
 ## Used Commands
 
@@ -17,4 +18,6 @@ npx prisma contract infer
 
 ```
 npx prisma contract emit
+npm install -D @nestjs/schematics@12.0.6
+
 ```
