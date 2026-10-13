@@ -10,6 +10,11 @@
 
 ## Used Commands
 
+to pull db tables as prisma schema
+```
+npx prisma contract infer
 ```
 
+```
+npx prisma contract emit
 ```
