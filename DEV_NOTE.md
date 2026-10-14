@@ -8,6 +8,7 @@
 ## Daily Log
 
 - 13-10-2026: https://youtu.be/Y9KNU2MnO-o?si=-4zsT65-6pYX4WJU&t=784
+- 14-10-2026: https://youtu.be/Y9KNU2MnO-o?si=-4zsT65-6pYX4WJU&t=784
 
 ## Install gotcha
 
@@ -17,7 +18,7 @@
 
 ## Used Commands
 
-to pull db tables as prisma schema
+### to pull db tables as prisma schema
 
 ```
 npx prisma contract infer
@@ -29,15 +30,23 @@ npm install -D @nestjs/schematics@12.0.6
 
 ```
 
-Prisma schema to local DB
+### Prisma schema to local DB
 
 ```
 npx prisma db update
 ```
 
-NVM (a thing like fvm)
+### NVM (a thing like fvm)
 
 ```
 nvm install 24.21.0                   
 nvm use 24.21.0
+```
+### Mix
+
+```
+nest g res auth --no-spec
+
+# For dto machanism 
+npm i -D class-validator class-transformer
 ```
