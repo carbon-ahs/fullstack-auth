@@ -2,8 +2,12 @@
 
 ## Main source
 
-- yt: https://youtu.be/Y9KNU2MnO-o?si=fgv34fCioGrNFl4L
-- gh: https://github.com/vahid-nejad/NestJS-NextJS-Authentication-Turborepo
+- yt: https://youtu.be/Y9KNU2MnO-o?si=fgv34fCioGrNFl4L  
+- gh: https://github.com/vahid-nejad/NestJS-NextJS-Authentication-Turborepo  
+
+## Links
+
+- Tailwind Installation with turborepo: https://tailwindcss.com/docs/installation/framework-guides/nextjs  
 
 ## Daily Log
 
@@ -41,6 +45,12 @@ npx prisma db update
 ```
 nvm install 24.21.0                   
 nvm use 24.21.0
+```
+
+### Tailwind
+
+```
+npm install tailwindcss @tailwindcss/postcss postcss
 ```
 ### Mix
 
