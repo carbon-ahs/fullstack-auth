@@ -12,7 +12,7 @@
 ## Daily Log
 
 - 13-10-2026: https://youtu.be/Y9KNU2MnO-o?si=-4zsT65-6pYX4WJU&t=784
-- 14-10-2026: https://youtu.be/Y9KNU2MnO-o?si=BWcqX0VBOTv5Aan0&t=1430
+- 14-10-2026: https://youtu.be/Y9KNU2MnO-o?si=xahDXeqp4ihs2fJY&t=1751
 
 ## Install gotcha
 
@@ -48,6 +48,11 @@ nvm use 24.21.0
 ```
 
 ### Tailwind
+
+```
+npm install tailwindcss @tailwindcss/postcss postcss
+```
+### Shad/CN
 
 ```
 npm install tailwindcss @tailwindcss/postcss postcss
