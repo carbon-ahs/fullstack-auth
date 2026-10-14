@@ -8,7 +8,7 @@
 ## Daily Log
 
 - 13-10-2026: https://youtu.be/Y9KNU2MnO-o?si=-4zsT65-6pYX4WJU&t=784
-- 14-10-2026: https://youtu.be/Y9KNU2MnO-o?si=-4zsT65-6pYX4WJU&t=784
+- 14-10-2026: https://youtu.be/Y9KNU2MnO-o?si=BWcqX0VBOTv5Aan0&t=1430
 
 ## Install gotcha
 
