@@ -46,7 +46,12 @@ nvm use 24.21.0
 
 ```
 nest g res auth --no-spec
+nest g res user --no-spec
 
 # For dto machanism 
 npm i -D class-validator class-transformer
+
+# password hasing
+npm i argon2
+
 ```

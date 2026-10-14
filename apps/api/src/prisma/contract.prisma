@@ -2,59 +2,59 @@
 // Contract inferred from the live database schema. Edit as needed, then run `prisma contract emit`.
 
 namespace public {
-  model Category {
-    id    Int     @id(map: "Category_pkey") @default(autoincrement())
-    slug  String
-    title String
-    img   String?
-    posts Post[]
+model Category {
+  id    Int     @id(map: "Category_pkey") @default(autoincrement())
+  slug  String
+  title String
+  img   String?
+  posts Post[]
 
-    @@index([slug], map: "Category_slug_key", unique: true)
-  }
+  @@index([slug], map: "Category_slug_key", unique: true)
+}
 
-  model User {
-    id                 Int           @id(map: "User_pkey") @default(autoincrement())
-    email              String
-    name               String
-    password           String
-    hashedRefreshToken String?
-    role               pg.enum(Role) @default("USER")
-    comments           Comment[]
-    posts              Post[]
+model User {
+  id                 Int       @id(map: "User_pkey") @default(autoincrement())
+  email              String    @unique
+  name               String
+  password           String
+  hashedRefreshToken String?
+  role               pg.enum(Role) @default("USER")
+  comments           Comment[]
+  posts              Post[]
 
-    @@index([email], map: "User_email_key", unique: true)
-  }
+  @@index([email], map: "User_email_key", unique: true)
+}
 
-  model Post {
-    id        Int                @id(map: "Post_pkey") @default(autoincrement())
-    createdAt TimestampString(3) @default(now())
-    slug      String
-    title     String
-    desc      String
-    img       String?
-    views     Int                @default(0)
-    catSlug   String
-    userEmail String
-    comments  Comment[]
-    category  Category           @relation(fields: [catSlug], references: [slug], onDelete: Restrict, onUpdate: Cascade, map: "Post_catSlug_fkey", index: false)
-    user      User               @relation(fields: [userEmail], references: [email], onDelete: Restrict, onUpdate: Cascade, map: "Post_userEmail_fkey", index: false)
+model Post {
+  id        Int       @id(map: "Post_pkey") @default(autoincrement())
+  createdAt TimestampString(3) @default(now())
+  slug      String
+  title     String
+  desc      String
+  img       String?
+  views     Int       @default(0)
+  catSlug   String
+  userEmail String
+  comments  Comment[]
+  category  Category  @relation(fields: [catSlug], references: [slug], onDelete: Restrict, onUpdate: Cascade, map: "Post_catSlug_fkey", index: false)
+  user      User      @relation(fields: [userEmail], references: [email], onDelete: Restrict, onUpdate: Cascade, map: "Post_userEmail_fkey", index: false)
 
-    @@index([slug], map: "Post_slug_key", unique: true)
-  }
+  @@index([slug], map: "Post_slug_key", unique: true)
+}
 
-  model Comment {
-    id        Int                 @id(map: "Comment_pkey") @default(autoincrement())
-    text      String
-    createdAt TimestampString(6)? @default(now())
-    userId    Int                 @map("user_id")
-    postId    Int                 @map("post_id")
-    user      User                @relation(fields: [userId], references: [id], map: "comments_author_id_users_id_fk", index: false)
-    post      Post                @relation(fields: [postId], references: [id], map: "comments_post_id_posts_id_fk", index: false)
-  }
+model Comment {
+  id     Int    @id(map: "Comment_pkey") @default(autoincrement())
+  text   String
+  createdAt TimestampString(6)? @default(now())
+  userId Int    @map("user_id")
+  postId Int    @map("post_id")
+  user   User   @relation(fields: [userId], references: [id], map: "comments_author_id_users_id_fk", index: false)
+  post   Post   @relation(fields: [postId], references: [id], map: "comments_post_id_posts_id_fk", index: false)
+}
 
-  native_enum Role {
-    ADMIN = "ADMIN"
-    EDITOR = "EDITOR"
-    USER = "USER"
-  }
+native_enum Role {
+ADMIN = "ADMIN"
+EDITOR = "EDITOR"
+USER = "USER"
+}
 }
