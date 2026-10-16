@@ -1,6 +1,12 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  ForbiddenException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UserService } from '../user/user.service.js';
 import { CreateUserDto } from '../user/dto/create-user.dto.js';
+import { verify } from 'argon2';
 
 @Injectable()
 export class AuthService {
@@ -18,5 +24,20 @@ export class AuthService {
       throw new ConflictException('User with this email already exists');
     }
     return this.userService.create(createUserDto);
+  }
+
+  async validateLocalUser(email: string, password: string) {
+    const user = await this.userService.findByEmail(email);
+    if (!user) {
+      throw new UnauthorizedException('User with this email not exists');
+    }
+
+    const isPasswordMatched = verify(password, user.password);
+
+    if (!isPasswordMatched) {
+      throw new UnauthorizedException('Invalid credentials.');
+    }
+
+    return { id: user.id, name: user.name };
   }
 }
