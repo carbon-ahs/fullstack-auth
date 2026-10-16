@@ -25,7 +25,7 @@
 ### Other
 
 - env variables works in Next, but it needs prefix `NEXT_PUBLIC_`
--
+- must use parenthesis in if statement. else there will be race condition and give weird unrelated errors
 
 ## Used Commands
 
