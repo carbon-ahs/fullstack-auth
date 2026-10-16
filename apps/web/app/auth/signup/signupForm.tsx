@@ -12,9 +12,8 @@ import SubmitButton from "@/components/submitButton";
 import {signUp} from "@/lib/auth";
 
 const SignUpForm = () => {
-  // const [state, action] = useFormState(signUp, undefined);
-  const [state, action, isPending] = useActionState(signUp, undefined);
-  // @ts-ignore
+  const [state, action, isPending] = useActionState(signUp, undefined); // but here i used useActionState
+
   return (
     <form action={action}>
       <div className="flex flex-col gap-2">

@@ -14,11 +14,18 @@
 - 13-10-2026: https://youtu.be/Y9KNU2MnO-o?si=-4zsT65-6pYX4WJU&t=784
 - 14-10-2026: https://youtu.be/Y9KNU2MnO-o?si=xahDXeqp4ihs2fJY&t=1751
 
-## Install gotcha
+## Gotcha
+
+### Instaltion
 
 - Turbo latest gives error, refer to this chat for install in any
   machine https://chatgpt.com/share/6acdfb62-5074-83e8-9282-587f31fd87c6
 - Latest Turbo and NestJs uses different TypeScript version. it courses error. fix in monorepo
+
+### Other
+
+- env variables works in Next, but it needs prefix `NEXT_PUBLIC_`
+-
 
 ## Used Commands
 

@@ -1,1 +1,3 @@
-export const BACKEND_URL = process.env.BACKEND_URL;
+import "dotenv/config";
+
+export const BACKEND_URL = process.env["NEXT_PUBLIC_BACKEND_URL"]!;

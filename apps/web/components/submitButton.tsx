@@ -2,12 +2,13 @@
 
 // import { getSession } from "@/lib/session";
 import Link from "next/link";
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 
-const SignInButton = ({children}: PropsWithChildren) => {
+const SignInButton = ({ children }: PropsWithChildren) => {
   // const session = await getSession();
+
   const { pending } = useFormStatus();
   // return (
   //   // <div className="flex items-center gap-2 ml-auto">

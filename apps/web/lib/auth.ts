@@ -3,11 +3,14 @@
 import { FormState, SignupFormSchema } from "@/lib/type";
 import { BACKEND_URL } from "@/lib/constants";
 import { redirect } from "next/navigation";
+import { delay } from "@/lib/utils";
 
 export async function signUp(
   state: FormState,
   formData: FormData,
 ): Promise<FormState> {
+  // await delay(3000);
+
   const validationFields = SignupFormSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
@@ -28,7 +31,8 @@ export async function signUp(
     redirect("auth/signin");
   } else {
     return {
-      message : response.status === 409 ? "User already in DB" : response.statusText,
+      message:
+        response.status === 409 ? "User already in DB" : response.statusText,
     };
   }
 }
