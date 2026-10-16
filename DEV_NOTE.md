@@ -14,7 +14,7 @@
 - 13-10-2026: https://youtu.be/Y9KNU2MnO-o?si=-4zsT65-6pYX4WJU&t=784
 - 14-10-2026: https://youtu.be/Y9KNU2MnO-o?si=xahDXeqp4ihs2fJY&t=1751
 - 15-10-2026: https://youtu.be/Y9KNU2MnO-o?si=GmLrIFn7WPcEaEjg&t=2939
-- 16-10-2026:
+- 16-10-2026: https://youtu.be/Y9KNU2MnO-o?si=Jp_YIFYX6axdeCPb&t=3828
 
 ## Gotcha
 
@@ -81,4 +81,7 @@ npm i argon2
 # Passport library for auth
 npm i @nestjs/passport passport passport-local
 npm i -D @types/passport-local
+
+# guards
+nest g gu auth/guards/local-auth
 ```

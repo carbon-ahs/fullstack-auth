@@ -11,5 +11,7 @@ export class AuthController {
   }
 
   @Post('signin')
-  loginUser(@Body() createUserDto: CreateUserDto) {}
+  loginUser(@Request request) {
+    return request.user;
+  }
 }
