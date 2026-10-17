@@ -15,10 +15,11 @@
 - 14-10-2026: https://youtu.be/Y9KNU2MnO-o?si=xahDXeqp4ihs2fJY&t=1751
 - 15-10-2026: https://youtu.be/Y9KNU2MnO-o?si=GmLrIFn7WPcEaEjg&t=2939
 - 16-10-2026: https://youtu.be/Y9KNU2MnO-o?si=Jp_YIFYX6axdeCPb&t=3828
+- 17-10-2026: https://youtu.be/Y9KNU2MnO-o?si=clMFwSBnNA5Zjboy&t=4607
 
 ## Gotcha
 
-### Instaltion
+### Installation
 
 - Turbo latest gives error, refer to this chat for install in any
   machine https://chatgpt.com/share/6acdfb62-5074-83e8-9282-587f31fd87c6

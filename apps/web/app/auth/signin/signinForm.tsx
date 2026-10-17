@@ -1,18 +1,14 @@
 "use client";
 import { Label } from "@/components/ui/label";
-
-// import { Input } from "@/components/ui/input";
-// import { Label } from "@/components/ui/label";
-// import SubmitButton from "@/components/ui/submitButton";
-// import { signUp } from "@/lib/auth";
 import React, { useActionState } from "react";
 import { useFormState } from "react-dom";
 import { Input } from "@/components/ui/input";
 import SubmitButton from "@/components/submitButton";
-import { signUp } from "@/lib/auth";
+import { signIn, signUp } from "@/lib/auth";
+import Link from "next/link";
 
-const SignUpForm = () => {
-  const [state, action, isPending] = useActionState(signUp, undefined); // but here i used useActionState
+const SigninForm = () => {
+  const [state, action, isPending] = useActionState(signIn, undefined); // but here i used useActionState
 
   return (
     <form action={action}>
@@ -20,14 +16,6 @@ const SignUpForm = () => {
         {state?.message && (
           <p className="text-sm text-red-500">{state.message}</p>
         )}
-        <div>
-          <Label htmlFor="name">Name</Label>
-          <Input id="name" name="name" placeholder="John Doe" />
-        </div>
-        {state?.error?.name && (
-          <p className="text-sm text-red-500">{state.error.name}</p>
-        )}
-
         <div>
           <Label htmlFor="email">Email</Label>
           <Input id="email" name="email" placeholder="john@example.com" />
@@ -49,7 +37,16 @@ const SignUpForm = () => {
             </ul>
           </div>
         )}
-        <SubmitButton>Sign Up</SubmitButton>
+        <Link href="#" className="text-sm underline">
+          Forget Password?
+        </Link>
+        <SubmitButton>Sign In</SubmitButton>
+        <div className="flex justify-between text-sm ">
+          <p className="text-gray-500">Don't have a account? </p>
+          <Link href="/auth/signup" className="text-sm underline">
+            Sign up!
+          </Link>
+        </div>
       </div>
     </form>
   );
@@ -98,4 +95,4 @@ const SignUpForm = () => {
 //   );
 // };
 
-export default SignUpForm;
+export default SigninForm;

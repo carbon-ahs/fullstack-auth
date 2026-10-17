@@ -10,8 +10,8 @@ export class AuthController {
     return this.authService.signupUser(createUserDto);
   }
 
-  @Post('signin')
-  loginUser(@Request request) {
-    return request.user;
-  }
+  // @Post('signin')
+  // loginUser(@Request request) {
+  //   return request.user;
+  // }
 }
