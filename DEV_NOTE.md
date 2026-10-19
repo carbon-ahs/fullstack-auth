@@ -16,6 +16,7 @@
 - 15-10-2026: https://youtu.be/Y9KNU2MnO-o?si=GmLrIFn7WPcEaEjg&t=2939
 - 16-10-2026: https://youtu.be/Y9KNU2MnO-o?si=Jp_YIFYX6axdeCPb&t=3828
 - 17-10-2026: https://youtu.be/Y9KNU2MnO-o?si=clMFwSBnNA5Zjboy&t=4607
+- 19-10-2026: https://youtu.be/Y9KNU2MnO-o?si=PAo-WHPJx5n6YxPC&t=6287
 
 ## Gotcha
 
