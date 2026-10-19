@@ -30,7 +30,7 @@ export async function signUp(
   });
 
   if (response.ok) {
-    redirect("auth/signin");
+    redirect("/auth/signin");
   } else {
     return {
       message:
