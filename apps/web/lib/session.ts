@@ -27,7 +27,7 @@ export async function createSession(payload: Session) {
     .setExpirationTime("7d")
     .sign(ENCODED_SECRET_KEY);
 
-  (await cookies()).set(SESSION_SECRET_KEY, session, {
+  (await cookies()).set("session", session, {
     httpOnly: true,
     secure: true,
     expires: expiredAt,
