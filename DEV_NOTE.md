@@ -29,6 +29,8 @@
 
 - env variables works in Next, but it needs prefix `NEXT_PUBLIC_`
 - must use parenthesis in if statement. else there will be race condition and give weird unrelated errors
+- For force refresh need to use `a` tag instead of `Link`.
+- No need of `import "dotenv/config"` in NextJs. But its mandatory in NestJs.
 
 ## Used Commands
 

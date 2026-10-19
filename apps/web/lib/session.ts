@@ -52,3 +52,7 @@ export async function getSession() {
     redirect("/auth/signin");
   }
 }
+
+export async function deleteSession() {
+  (await cookies()).delete("session");
+}

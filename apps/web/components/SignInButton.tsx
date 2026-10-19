@@ -14,6 +14,7 @@ const SignInButton = async () => {
       ) : (
         <>
           <p>{session.user.name}</p>
+          {/*For force refresh here is using a tag instead of Link*/}
           <a href={"/api/auth/signout"}>Sign Out</a>
         </>
       )}

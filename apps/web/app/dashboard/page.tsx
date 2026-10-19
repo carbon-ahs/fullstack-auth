@@ -1,19 +1,17 @@
-import Link from "next/link";
+import { getSession } from "@/lib/session";
+import { Role } from "@/lib/type";
+import { redirect } from "next/navigation";
 import React from "react";
 
-const DashBoard = () => {
-  return (
-    <div className="bg-white p-8 rounded-lg shadow-lg w-96 flex flex-col justify-center items-center ">
-      <h1 className="text-center text-2xl font-bold mb-4">Dash Board</h1>
+const DashboardPage = async () => {
+  const session = await getSession();
+  if (!session || !session.user) {
+    redirect("/auth/signin");
+  }
+  // if (session.user.role !== Role.ADMIN) redirect("/auth/signin");
+  console.log({ session });
 
-      <div className="flex justify-between text-sm">
-        <p>Already have an account?</p>
-        <Link className="underline" href={"/auth/signin"}>
-          Sign In
-        </Link>
-      </div>
-    </div>
-  );
+  return <div>Dashboard</div>;
 };
 
-export default DashBoard;
+export default DashboardPage;
