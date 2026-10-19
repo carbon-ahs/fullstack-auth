@@ -16,7 +16,7 @@
 - 15-10-2026: https://youtu.be/Y9KNU2MnO-o?si=GmLrIFn7WPcEaEjg&t=2939
 - 16-10-2026: https://youtu.be/Y9KNU2MnO-o?si=Jp_YIFYX6axdeCPb&t=3828
 - 17-10-2026: https://youtu.be/Y9KNU2MnO-o?si=clMFwSBnNA5Zjboy&t=4607
-- 19-10-2026: https://youtu.be/Y9KNU2MnO-o?si=PAo-WHPJx5n6YxPC&t=6287
+- 19-10-2026: https://youtu.be/Y9KNU2MnO-o?si=YzDPTQbs4jWcK22T&t=6611
 
 ## Gotcha
 
@@ -93,4 +93,11 @@ nest g gu auth/guards/local-auth
 
 # Jose for encripting JWT token
 npm i jose
+
+# jwt
+npm i @nestjs/jwt @nestjs/config
+
+# JWT tocken generation
+openssl rand -base64 32
+
 ```

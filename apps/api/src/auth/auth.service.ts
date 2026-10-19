@@ -32,7 +32,6 @@ export class AuthService {
       throw new UnauthorizedException('User with this email not exists');
     }
 
-
     const isPasswordMatched = await verify(user.password, password);
 
     if (!isPasswordMatched) {
@@ -41,4 +40,6 @@ export class AuthService {
 
     return { id: user.id, name: user.name };
   }
+
+  async login(userId: number, name: string) {}
 }
