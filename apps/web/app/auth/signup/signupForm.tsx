@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import React, { useActionState } from "react";
 import { useFormState } from "react-dom";
 import {Input} from "@/components/ui/input";
-import SubmitButton from "@/components/submitButton";
+import SubmitButton from "@/components/ui/submitButton";
 import {signUp} from "@/lib/auth";
 
 const SignUpForm = () => {
