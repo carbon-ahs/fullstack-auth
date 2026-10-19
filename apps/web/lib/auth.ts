@@ -4,7 +4,8 @@ import { FormState, LoginFormSchema, SignupFormSchema } from "@/lib/type";
 import { BACKEND_URL } from "@/lib/constants";
 import { redirect } from "next/navigation";
 import { delay } from "@/lib/utils";
-import { z } from "zod";
+import { email, z } from "zod";
+import { createSession } from "@/lib/session";
 
 export async function signUp(
   state: FormState,
@@ -61,7 +62,8 @@ export async function signIn(
     // redirect(`${BACKEND_URL}/dashboard`);
     const result = await response.json();
     // TODO: Create session
-    console.log(result);
+    await createSession({ user: { id: result.id, name: result.name } });
+    redirect("/")
   } else {
     return {
       message:

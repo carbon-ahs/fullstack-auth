@@ -32,8 +32,6 @@ export class AuthService {
       throw new UnauthorizedException('User with this email not exists');
     }
 
-    console.log('Stored password value:', user.password); // ← add this line
-    console.log('Type of stored password:', typeof user.password);
 
     const isPasswordMatched = await verify(user.password, password);
 
