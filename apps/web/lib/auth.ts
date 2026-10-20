@@ -59,11 +59,13 @@ export async function signIn(
   });
 
   if (response.ok) {
-    // redirect(`${BACKEND_URL}/dashboard`);
     const result = await response.json();
-    // TODO: Create session
-    await createSession({ user: { id: result.id, name: result.name } });
-    redirect("/")
+
+    await createSession({
+      user: { id: result.id, name: result.name },
+      accessToken: result.accessToken,
+    });
+    redirect("/");
   } else {
     return {
       message:

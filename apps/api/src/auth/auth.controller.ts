@@ -11,9 +11,9 @@ export class AuthController {
     return this.authService.signupUser(createUserDto);
   }
 
-  @Post('signin')
   @UseGuards(LocalAuthGuard)
+  @Post('signin')
   loginUser(@Request() request: any) {
-    return request.user;
+    return this.authService.login(request.user.id, request.user.name);
   }
 }

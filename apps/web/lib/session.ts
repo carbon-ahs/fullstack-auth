@@ -5,13 +5,12 @@ import { ENCODED_SECRET_KEY, SESSION_SECRET_KEY } from "@/lib/constants";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-
 export type Session = {
   user: {
     id: string;
     name: string;
   };
-  // accessToken : {};
+  accessToken: {};
   // refreshToken : {};
 };
 
@@ -42,11 +41,10 @@ export async function getSession() {
     return null;
   }
   try {
-
-  const {payload} = await jwtVerify(cookie, ENCODED_SECRET_KEY, {
-    algorithms: ["HS256"],
-  });
-  return payload as Session;
+    const { payload } = await jwtVerify(cookie, ENCODED_SECRET_KEY, {
+      algorithms: ["HS256"],
+    });
+    return payload as Session;
   } catch (error) {
     console.error("Failed To varify:" + error);
     redirect("/auth/signin");

@@ -32,7 +32,6 @@
 - must use parenthesis in if statement. else there will be race condition and give weird unrelated errors
 - For force refresh need to use `a` tag instead of `Link`.
 - No need of `import "dotenv/config"` in NextJs. But its mandatory in NestJs.
-
 - Leading '/' is very important. without it gives weird error `redirect("/auth/signin");`
 
 ## Used Commands
