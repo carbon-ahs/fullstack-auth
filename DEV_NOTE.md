@@ -2,12 +2,12 @@
 
 ## Main source
 
-- yt: https://youtu.be/Y9KNU2MnO-o?si=fgv34fCioGrNFl4L  
-- gh: https://github.com/vahid-nejad/NestJS-NextJS-Authentication-Turborepo  
+- yt: https://youtu.be/Y9KNU2MnO-o?si=fgv34fCioGrNFl4L
+- gh: https://github.com/vahid-nejad/NestJS-NextJS-Authentication-Turborepo
 
 ## Links
 
-- Tailwind Installation with turborepo: https://tailwindcss.com/docs/installation/framework-guides/nextjs  
+- Tailwind Installation with turborepo: https://tailwindcss.com/docs/installation/framework-guides/nextjs
 
 ## Daily Log
 
@@ -17,6 +17,7 @@
 - 16-10-2026: https://youtu.be/Y9KNU2MnO-o?si=Jp_YIFYX6axdeCPb&t=3828
 - 17-10-2026: https://youtu.be/Y9KNU2MnO-o?si=clMFwSBnNA5Zjboy&t=4607
 - 19-10-2026: https://youtu.be/Y9KNU2MnO-o?si=YzDPTQbs4jWcK22T&t=6611
+- 22-10-2026: https://youtu.be/Y9KNU2MnO-o?si=6PEwauXq-i8yVn_9&t=7080
 
 ## Gotcha
 
@@ -33,6 +34,11 @@
 - For force refresh need to use `a` tag instead of `Link`.
 - No need of `import "dotenv/config"` in NextJs. But its mandatory in NestJs.
 - Leading '/' is very important. without it gives weird error `redirect("/auth/signin");`
+
+## Need to more learn
+
+- Types in TypeScript
+-
 
 ## Used Commands
 
@@ -66,11 +72,13 @@ nvm use 24.21.0
 ```
 npm install tailwindcss @tailwindcss/postcss postcss
 ```
+
 ### Shad/CN
 
 ```
 npm install tailwindcss @tailwindcss/postcss postcss
 ```
+
 ### Mix
 
 ```
