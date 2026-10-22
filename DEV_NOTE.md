@@ -32,13 +32,13 @@
 - env variables works in Next, but it needs prefix `NEXT_PUBLIC_`
 - must use parenthesis in if statement. else there will be race condition and give weird unrelated errors
 - For force refresh need to use `a` tag instead of `Link`.
-- No need of `import "dotenv/config"` in NextJs. But its mandatory in NestJs.
+- No need of `import "dotenv/config"` in Next.js. But its mandatory in NestJs.
 - Leading '/' is very important. without it gives weird error `redirect("/auth/signin");`
 
 ## Need to more learn
 
 - Types in TypeScript
--
+- Sometime imports are .ts sometime .js why?
 
 ## Used Commands
 
@@ -106,5 +106,9 @@ npm i @nestjs/jwt @nestjs/config
 
 # JWT tocken generation
 openssl rand -base64 32
+
+# Passport JWT library for auth with jwt
+npm i passport-jwt
+npm i -D @types/passport-jwt
 
 ```

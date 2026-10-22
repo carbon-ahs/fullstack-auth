@@ -56,4 +56,15 @@ export class AuthService {
     ]);
     return { accessToken };
   }
+
+  async validateJwtUser(userId: number) {
+    const user = await this.userService.findOne(userId);
+    if (!user) {
+      throw new UnauthorizedException('Invalid user.');
+    }
+
+    const currentUser = { id: user.id };
+
+    return currentUser;
+  }
 }

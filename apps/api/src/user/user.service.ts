@@ -21,8 +21,10 @@ export class UserService {
     return `This action returns all user`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(userId: number) {
+    return await this.prisma.db.orm.public.User.where({
+      id: userId,
+    }).first();
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
