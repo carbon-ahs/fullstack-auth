@@ -17,7 +17,8 @@
 - 16-10-2026: https://youtu.be/Y9KNU2MnO-o?si=Jp_YIFYX6axdeCPb&t=3828
 - 17-10-2026: https://youtu.be/Y9KNU2MnO-o?si=clMFwSBnNA5Zjboy&t=4607
 - 19-10-2026: https://youtu.be/Y9KNU2MnO-o?si=YzDPTQbs4jWcK22T&t=6611
-- 22-10-2026: https://youtu.be/Y9KNU2MnO-o?si=6PEwauXq-i8yVn_9&t=7080
+- 20-10-2026: https://youtu.be/Y9KNU2MnO-o?si=6PEwauXq-i8yVn_9&t=7080
+- 22-10-2026: https://youtu.be/Y9KNU2MnO-o?si=XrYzcWheRKsVTNDO&t=7818
 
 ## Gotcha
 
