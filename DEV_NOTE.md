@@ -34,6 +34,7 @@
 - For force refresh need to use `a` tag instead of `Link`.
 - No need of `import "dotenv/config"` in Next.js. But its mandatory in NestJs.
 - Leading '/' is very important. without it gives weird error `redirect("/auth/signin");`
+- jwt strategy gives a type error. have a look in source and current implementation.
 
 ## Need to more learn
 
@@ -97,6 +98,8 @@ npm i -D @types/passport-local
 
 # guards
 nest g gu auth/guards/local-auth
+nest g gu auth/guards/jwt-auth
+
 
 # Jose for encripting JWT token
 npm i jose
