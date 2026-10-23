@@ -74,4 +74,25 @@ export class AuthService {
 
     return currentUser;
   }
+
+  async validateRefreshToken(userId: number) {
+    const user = await this.userService.findOne(userId);
+    if (!user) {
+      throw new UnauthorizedException('Invalid user.');
+    }
+
+    const currentUser = { id: user.id };
+
+    return currentUser;
+  }
+
+  async refreshToken(userId: number, name: string) {
+    const { accessToken, refreshToken } = await this.generateToken(userId);
+    return {
+      id: userId,
+      name: name,
+      accessToken,
+      refreshToken,
+    };
+  }
 }

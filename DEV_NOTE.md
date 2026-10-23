@@ -100,6 +100,7 @@ npm i -D @types/passport-local
 # guards
 nest g gu auth/guards/local-auth
 nest g gu auth/guards/jwt-auth
+nest g gu auth/guards/refresh-auth
 
 
 # Jose for encripting JWT token

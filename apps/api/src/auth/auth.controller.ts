@@ -10,6 +10,7 @@ import { AuthService } from './auth.service.js';
 import { CreateUserDto } from '../user/dto/create-user.dto.js';
 import { LocalAuthGuard } from './guards/local-auth/local-auth.guard.js';
 import { JwtAuthGuard } from './guards/jwt-auth/jwt-auth.guard.js';
+import { RefreshAuthGuard } from './guards/refresh-auth/refresh-auth.guard.js';
 
 @Controller('auth')
 export class AuthController {
@@ -29,5 +30,11 @@ export class AuthController {
   @Get('protected')
   getAll(@Request() request: any) {
     return { message: `Protected api. user id : ${request.user.id}` };
+  }
+
+  @UseGuards(RefreshAuthGuard)
+  @Post('refresh')
+  refreshToken(@Request() request: any) {
+    return this.authService.refreshToken(request.user.id, request.user.name);
   }
 }
