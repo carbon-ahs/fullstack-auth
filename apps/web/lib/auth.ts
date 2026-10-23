@@ -1,7 +1,7 @@
 "use server";
 
 import { FormState, LoginFormSchema, SignupFormSchema } from "@/lib/type";
-import { BACKEND_URL } from "@/lib/constants";
+import { APP_URL, BACKEND_URL } from "@/lib/constants";
 import { redirect } from "next/navigation";
 import { createSession, updateTokens } from "@/lib/session";
 
@@ -81,15 +81,26 @@ export const refreshToken = async (oldRefreshToken: string) => {
       body: JSON.stringify({ refresh: oldRefreshToken }),
     });
 
-    console.log("Refresh token", response);
-
     if (!response.ok) {
-      throw new Error("Refresh token failed." + response.statusText);
+      throw new Error("Backend refresh failed: " + response.statusText);
     }
 
     const { accessToken, refreshToken } = await response.json();
-    // TODO: update session with new tokens
-    // await updateTokens({ accessToken, refreshToken });
+
+    const updateTokens = await fetch(`${APP_URL}/api/auth/update`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ accessToken, refreshToken }),
+    });
+
+    if (!updateTokens.ok) {
+      const errorText = await updateTokens.text();
+      console.error("API route error response:", errorText);
+
+      throw new Error(
+        `Session update failed (${updateTokens.status}): ${updateTokens.statusText}`,
+      );
+    }
     return accessToken;
   } catch (error) {
     console.error("Token refresh error: ", error);

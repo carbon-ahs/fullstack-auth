@@ -6,6 +6,9 @@ info:
 http:
   method: GET
   url: http://localhost:8000/auth/protected
+  headers:
+    - name: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsImlhdCI6MTc5Mjc2NjcxOSwiZXhwIjoxNzkyNzY2Nzc5fQ.cPqAnKGXRM681miDn49uabtAwM5kH_zhKvVyj0tqMVw
   auth: inherit
 
 settings:

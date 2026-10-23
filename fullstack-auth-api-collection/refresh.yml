@@ -9,11 +9,12 @@ http:
   headers:
     - name: Authorization
       value: Bearer    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsImlhdCI6MTc5Mjc1MzY1OSwiZXhwIjoxNzkyNzUzNzE5fQ.j7gtYFHfBBUJbd0UH8FKVNlYZbkAEXqWAFOl9yZTt1Q
+      disabled: true
   body:
     type: json
     data: |-
       {
-        "refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsImlhdCI6MTc5Mjc1MzY1OSwiZXhwIjoxNzkzMzU4NDU5fQ.1Xy7djsY6OgDxQje5cHtbhwRVejzqfusu0pdmC-rfDg"
+        "refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsImlhdCI6MTc5Mjc2NjYxNiwiZXhwIjoxNzkzMzcxNDE2fQ.ONieSOs6pdSOMzFX1zQyyo9bejQTgirzyoOfllDKnEc"
       }
   auth: inherit
 
