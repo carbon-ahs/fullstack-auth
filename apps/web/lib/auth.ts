@@ -77,16 +77,19 @@ export const refreshToken = async (oldRefreshToken: string) => {
   try {
     const response = await fetch(`${BACKEND_URL}/auth/refresh`, {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ refresh: oldRefreshToken }),
     });
 
+    console.log("Refresh token", response);
+
     if (!response.ok) {
-      throw new Error("Refresh token failed.");
+      throw new Error("Refresh token failed." + response.statusText);
     }
 
     const { accessToken, refreshToken } = await response.json();
-    // update session with new tokens
-    await updateTokens({ accessToken, refreshToken });
+    // TODO: update session with new tokens
+    // await updateTokens({ accessToken, refreshToken });
     return accessToken;
   } catch (error) {
     console.error("Token refresh error: ", error);

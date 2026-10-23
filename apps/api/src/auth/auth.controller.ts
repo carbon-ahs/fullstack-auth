@@ -35,6 +35,7 @@ export class AuthController {
   @UseGuards(RefreshAuthGuard)
   @Post('refresh')
   refreshToken(@Request() request: any) {
+    console.log('refresh token called.');
     return this.authService.refreshToken(request.user.id, request.user.name);
   }
 }

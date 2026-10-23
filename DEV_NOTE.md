@@ -19,7 +19,7 @@
 - 19-10-2026: https://youtu.be/Y9KNU2MnO-o?si=YzDPTQbs4jWcK22T&t=6611
 - 20-10-2026: https://youtu.be/Y9KNU2MnO-o?si=6PEwauXq-i8yVn_9&t=7080
 - 22-10-2026: https://youtu.be/Y9KNU2MnO-o?si=XrYzcWheRKsVTNDO&t=7818
-- 23-10-2026: https://youtu.be/Y9KNU2MnO-o?si=5-VN_bqQzdjmTOsW&t=9256
+- 23-10-2026: https://youtu.be/Y9KNU2MnO-o?si=xSAixXw6UFjo5nzm&t=10166
 
 ## Gotcha
 
@@ -37,12 +37,13 @@
 - No need of `import "dotenv/config"` in Next.js. But its mandatory in NestJs.
 - Leading '/' is very important. without it gives weird error `redirect("/auth/signin");`
 - jwt strategy gives a type error. have a look in source and current implementation.
--
 
 ## Need to more learn
 
 - Types in TypeScript
 - Sometime imports are .ts sometime .js why?
+- There is a temporary type in `web/lib/authFetch.ts` need to study that file
+-
 
 ## Used Commands
 
