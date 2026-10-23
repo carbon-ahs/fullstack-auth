@@ -54,3 +54,34 @@ export async function getSession() {
 export async function deleteSession() {
   (await cookies()).delete("session");
 }
+
+export async function updateTokens({
+  accessToken,
+  refreshToken,
+}: {
+  accessToken: string;
+  refreshToken: string;
+}) {
+  const cookieSession = (await cookies()).get("session")?.value;
+  if (!cookieSession) {
+    return null;
+  }
+  const { payload } = await jwtVerify<Session>(
+    cookieSession,
+    ENCODED_SECRET_KEY,
+  );
+
+  if (!payload) {
+    throw new Error("Could not find session");
+  }
+
+  const newPayload = {
+    user: {
+      ...payload.user,
+    },
+    accessToken,
+    refreshToken,
+  };
+
+  await createSession(newPayload);
+}

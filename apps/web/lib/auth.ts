@@ -3,7 +3,7 @@
 import { FormState, LoginFormSchema, SignupFormSchema } from "@/lib/type";
 import { BACKEND_URL } from "@/lib/constants";
 import { redirect } from "next/navigation";
-import { createSession } from "@/lib/session";
+import { createSession, updateTokens } from "@/lib/session";
 
 export async function signUp(
   state: FormState,
@@ -72,3 +72,24 @@ export async function signIn(
     };
   }
 }
+
+export const refreshToken = async (oldRefreshToken: string) => {
+  try {
+    const response = await fetch(`${BACKEND_URL}/auth/refresh`, {
+      method: "POST",
+      body: JSON.stringify({ refresh: oldRefreshToken }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Refresh token failed.");
+    }
+
+    const { accessToken, refreshToken } = await response.json();
+    // update session with new tokens
+    await updateTokens({ accessToken, refreshToken });
+    return accessToken;
+  } catch (error) {
+    console.error("Token refresh error: ", error);
+    return null;
+  }
+};
