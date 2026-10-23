@@ -28,6 +28,6 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Get('protected')
   getAll(@Request() request: any) {
-    return `Protected api. user id : ${request.user.id}`;
+    return { message: `Protected api. user id : ${request.user.id}` };
   }
 }
