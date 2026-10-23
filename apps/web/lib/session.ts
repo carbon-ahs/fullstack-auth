@@ -10,8 +10,8 @@ export type Session = {
     id: string;
     name: string;
   };
-  accessToken: {};
-  // refreshToken : {};
+  accessToken: string;
+  refreshToken: string;
 };
 
 export async function createSession(payload: Session) {

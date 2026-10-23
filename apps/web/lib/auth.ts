@@ -3,8 +3,6 @@
 import { FormState, LoginFormSchema, SignupFormSchema } from "@/lib/type";
 import { BACKEND_URL } from "@/lib/constants";
 import { redirect } from "next/navigation";
-import { delay } from "@/lib/utils";
-import { email, z } from "zod";
 import { createSession } from "@/lib/session";
 
 export async function signUp(
@@ -64,6 +62,7 @@ export async function signIn(
     await createSession({
       user: { id: result.id, name: result.name },
       accessToken: result.accessToken,
+      refreshToken: result.refreshToken,
     });
     redirect("/");
   } else {
