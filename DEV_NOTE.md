@@ -21,6 +21,7 @@
 - 22-10-2026: https://youtu.be/Y9KNU2MnO-o?si=XrYzcWheRKsVTNDO&t=7818
 - 23-10-2026: https://youtu.be/Y9KNU2MnO-o?si=RfOLJnsHDikPHU7C&t=10480
 - 24-10-2026: https://youtu.be/Y9KNU2MnO-o?si=-OQojUxBeUkb2dfq&t=12321
+- 25-10-2026: https://youtu.be/Y9KNU2MnO-o?si=qHwKGM-Wnrw56S1E&t=12631
 
 ## Gotcha
 
@@ -38,6 +39,8 @@
 - No need of `import "dotenv/config"` in Next.js. But its mandatory in NestJs.
 - Leading '/' is very important. without it gives weird error `redirect("/auth/signin");`
 - jwt strategy gives a type error. have a look in source and current implementation.
+- in this project only refresh token is hashed and saved to db. in prod both tokens should be saved this way to
+  invalidate
 
 ## Need to more learn
 

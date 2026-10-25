@@ -7,6 +7,7 @@ import { hash } from 'argon2';
 @Injectable()
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
+
   async create(createUserDto: CreateUserDto) {
     const { password, ...user } = createUserDto;
     const hashedPassword = await hash(password);
@@ -39,5 +40,11 @@ export class UserService {
     return await this.prisma.db.orm.public.User.where({
       email: email,
     }).first();
+  }
+
+  async updateHashedRefreshToken(userId: number, hashedRefreshToken: string) {
+    return this.prisma.db.orm.public.User.where({ id: userId }).update({
+      hashedRefreshToken,
+    });
   }
 }
