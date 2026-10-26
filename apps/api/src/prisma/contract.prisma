@@ -17,12 +17,11 @@ model User {
   email              String    @unique
   name               String
   password           String
-  hashedRefreshToken String?
+  hashedRefreshToken String
   role               pg.enum(Role) @default("USER")
   comments           Comment[]
   posts              Post[]
 
-  @@index([email], map: "User_email_key", unique: true)
 }
 
 model Post {

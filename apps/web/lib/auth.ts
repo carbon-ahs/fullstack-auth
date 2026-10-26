@@ -82,6 +82,7 @@ export const refreshToken = async (oldRefreshToken: string) => {
     });
 
     if (!response.ok) {
+      // 2nd time gives error here
       throw new Error("Backend refresh failed: " + response.statusText);
     }
 

@@ -55,7 +55,7 @@ export async function deleteSession() {
   (await cookies()).delete("session");
 }
 
-export async function updateTokens({
+export async function updateTokensV0({
   accessToken,
   refreshToken,
 }: {
@@ -74,6 +74,35 @@ export async function updateTokens({
   if (!payload) {
     throw new Error("Could not find session");
   }
+
+  const newPayload = {
+    user: {
+      ...payload.user,
+    },
+    accessToken,
+    refreshToken,
+  };
+
+  await createSession(newPayload);
+}
+
+export async function updateTokens({
+  accessToken,
+  refreshToken,
+}: {
+  accessToken: string;
+  refreshToken: string;
+}) {
+  const cookieSession = (await cookies()).get("session")?.value;
+
+  if (!cookieSession) {
+    throw new Error("Session cookie is missing");
+  }
+
+  const { payload } = await jwtVerify<Session>(
+    cookieSession,
+    ENCODED_SECRET_KEY,
+  );
 
   const newPayload = {
     user: {

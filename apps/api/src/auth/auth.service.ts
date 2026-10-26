@@ -77,11 +77,22 @@ export class AuthService {
     return currentUser;
   }
 
-  async validateRefreshToken(userId: number) {
+  async validateRefreshToken(userId: number, refreshToken: string) {
     const user = await this.userService.findOne(userId);
     if (!user) {
-      throw new UnauthorizedException('Invalid user.');
+      throw new UnauthorizedException('Invalid user :(');
     }
+    if (!user.hashedRefreshToken) {
+      throw new UnauthorizedException('Invalid hashedRefreshToken :(');
+    }
+
+    const isRefreshTokenMatched = await verify(
+        user.hashedRefreshToken,
+        refreshToken,
+      );
+      if (!isRefreshTokenMatched) {
+        throw new UnauthorizedException('Invalid refresh token');
+      }
 
     const currentUser = { id: user.id };
 
@@ -90,11 +101,17 @@ export class AuthService {
 
   async refreshToken(userId: number, name: string) {
     const { accessToken, refreshToken } = await this.generateToken(userId);
+    const hashedRefreshToken = await hash(refreshToken);
+    await this.userService.updateHashedRefreshToken(userId, hashedRefreshToken);
     return {
       id: userId,
       name: name,
       accessToken,
       refreshToken,
     };
+  }
+
+  async signOutUser(userId: number) {
+    return await this.userService.updateHashedRefreshToken(userId, null);
   }
 }

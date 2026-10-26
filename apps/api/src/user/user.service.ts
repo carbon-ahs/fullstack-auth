@@ -42,7 +42,7 @@ export class UserService {
     }).first();
   }
 
-  async updateHashedRefreshToken(userId: number, hashedRefreshToken: string) {
+  async updateHashedRefreshToken(userId: number, hashedRefreshToken: string | null) {
     return this.prisma.db.orm.public.User.where({ id: userId }).update({
       hashedRefreshToken,
     });

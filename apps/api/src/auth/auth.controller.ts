@@ -5,6 +5,7 @@ import {
   UseGuards,
   Request,
   Get,
+  Req,
 } from '@nestjs/common';
 import { AuthService } from './auth.service.js';
 import { CreateUserDto } from '../user/dto/create-user.dto.js';
@@ -36,5 +37,10 @@ export class AuthController {
   @Post('refresh')
   refreshToken(@Request() request: any) {
     return this.authService.refreshToken(request.user.id, request.user.name);
+  }
+  @UseGuards(JwtAuthGuard)
+  @Post('signout')
+  signOutUser(@Req() request: any) {
+    return this.authService.signOutUser(request.user.id);
   }
 }
