@@ -104,7 +104,11 @@ export async function updateTokens({
     ENCODED_SECRET_KEY,
   );
 
-  const newPayload = {
+  if (!payload) {
+    throw new Error("Could not find session");
+  }
+
+  const newPayload: Session = {
     user: {
       ...payload.user,
     },

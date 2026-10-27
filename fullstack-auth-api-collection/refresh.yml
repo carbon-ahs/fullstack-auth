@@ -8,13 +8,13 @@ http:
   url: http://localhost:8000/auth/refresh
   headers:
     - name: Authorization
-      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImlhdCI6MTc5MzAwNjMyMywiZXhwIjoxNzkzMDA2MzgzfQ.icax5XkrMY39tetoJAtRzQ-jLr4at6Pw2w6l2vTxK4I
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImlhdCI6MTc5MzA5MDMyOSwiZXhwIjoxNzkzMDkwMzU5fQ.LJ4GLlBF_36fV1xLMlVMyPI9a9SlzBuYM3eggUna-bc
       disabled: true
   body:
     type: json
     data: |-
       {
-        "refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImlhdCI6MTc5MzAwNjMyMywiZXhwIjoxNzkzNjExMTIzfQ.e5wbhcN4-4bJOzE0iVisMSF4Xt87ASe5TC2GazSmtNI"
+        "refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImlhdCI6MTc5MzA5MDMyOSwiZXhwIjoxNzkzNjk1MTI5fQ.2TI-K5xaZgU2bufDrkdxj9s-f3ShCW-tGRAOdnxl8-Q"
       }
   auth: inherit
 

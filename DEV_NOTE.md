@@ -125,3 +125,158 @@ npm i passport-jwt
 npm i -D @types/passport-jwt
 
 ```
+
+## Chat Ref
+
+- https://chatgpt.com/share/6ae07d95-2dc4-83e8-8404-ec498fa66fbc
+
+## Used Prompts
+
+My next app cannot update session. I tested my api though postman, it is working well. help
+
+```
+export const authFetch = async (
+  url: string | URL,
+  options: FetchOptions = {},
+) => {
+  const session = await getSession();
+  options.headers = {
+    ...options.headers,
+    Authorization: `Bearer ${session?.accessToken}`,
+  };
+
+  let response = await fetch(url, options);
+  if (response.status === 401) {
+    if (!session?.refreshToken) {
+      throw new Error("Refresh token not found in session.");
+    }
+    const newAccessToken = await refreshToken(session.refreshToken);
+
+    if (newAccessToken) {
+      options.headers.Authorization = `Bearer ${newAccessToken}`;
+      response = await fetch(url, options);
+    }
+  }
+  return response;
+};
+
+
+export const refreshToken = async (oldRefreshToken: string) => {
+  try {
+    const response = await fetch(`${BACKEND_URL}/auth/refresh`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ refresh: oldRefreshToken }),
+    });
+
+    if (!response.ok) {
+      // 2nd time gives error here
+      throw new Error("Backend refresh failed: " + response.statusText);
+    }
+
+    const { accessToken, refreshToken } = await response.json();
+
+    const updateTokens = await fetch(`${APP_URL}/api/auth/update`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ accessToken, refreshToken }),
+    });
+
+    if (!updateTokens.ok) {
+      const errorText = await updateTokens.text();
+      console.error("API route error response:", errorText);
+
+      throw new Error(
+        `Session update failed (${updateTokens.status}): ${updateTokens.statusText}`,
+      );
+    }
+    return accessToken;
+  } catch (error) {
+    console.error("Token refresh error: ", error);
+    return null;
+  }
+};
+
+
+export async function POST(req: NextRequest) {
+  const { accessToken, refreshToken } = await req.json();
+
+  if (!accessToken || !refreshToken) {
+    return Response.json(
+      { message: "Provide tokens." },
+      { status: 400 },
+    );
+  }
+
+  if (!req.cookies.get("session")?.value) {
+    return Response.json(
+      { message: "Session cookie missing from request." },
+      { status: 401 },
+    );
+  }
+
+  try {
+    await updateTokens({ accessToken, refreshToken });
+
+    return Response.json({ ok: true });
+  } catch (error) {
+    console.error("Failed to update session:", error);
+
+    return Response.json(
+      { message: "Failed to update session." },
+      { status: 500 },
+    );
+  }
+}
+
+
+export async function updateTokens({
+  accessToken,
+  refreshToken,
+}: {
+  accessToken: string;
+  refreshToken: string;
+}) {
+  const cookieSession = (await cookies()).get("session")?.value;
+
+  if (!cookieSession) {
+    throw new Error("Session cookie is missing");
+  }
+
+  const { payload } = await jwtVerify<Session>(
+    cookieSession,
+    ENCODED_SECRET_KEY,
+  );
+
+  const newPayload = {
+    user: {
+      ...payload.user,
+    },
+    accessToken,
+    refreshToken,
+  };
+
+  await createSession(newPayload);
+}
+
+export async function createSession(payload: Session) {
+  const seven_days_in_millisecond = 7 * 24 * 60 * 60 * 1000;
+  const expiredAt = new Date(Date.now() + seven_days_in_millisecond);
+
+  const session = await new SignJWT(payload)
+    .setProtectedHeader({
+      alg: "HS256",
+    })
+    .setIssuedAt()
+    .setExpirationTime("7d")
+    .sign(ENCODED_SECRET_KEY);
+
+  (await cookies()).set("session", session, {
+    httpOnly: true,
+    secure: true,
+    expires: expiredAt,
+    sameSite: "lax",
+    path: "/",
+  });
+}
+```

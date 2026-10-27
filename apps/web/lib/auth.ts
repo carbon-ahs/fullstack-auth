@@ -4,6 +4,7 @@ import { FormState, LoginFormSchema, SignupFormSchema } from "@/lib/type";
 import { APP_URL, BACKEND_URL } from "@/lib/constants";
 import { redirect } from "next/navigation";
 import { createSession, updateTokens } from "@/lib/session";
+import { cookies } from "next/headers";
 
 export async function signUp(
   state: FormState,
@@ -82,7 +83,6 @@ export const refreshToken = async (oldRefreshToken: string) => {
     });
 
     if (!response.ok) {
-      // 2nd time gives error here
       throw new Error("Backend refresh failed: " + response.statusText);
     }
 
@@ -94,6 +94,22 @@ export const refreshToken = async (oldRefreshToken: string) => {
       body: JSON.stringify({ accessToken, refreshToken }),
     });
 
+    // const sessionCookie = (await cookies()).get("session")?.value;
+
+    // if (!sessionCookie) {
+    //   throw new Error("Session cookie not found in current request.");
+    // }
+    //
+    // const updateTokens = await fetch(`${APP_URL}/api/auth/update`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Cookie: `session=${sessionCookie}`,
+    //   },
+    //   body: JSON.stringify({ accessToken, refreshToken }),
+    //   cache: "no-store",
+    // });
+    console.log(updateTokens);
     if (!updateTokens.ok) {
       const errorText = await updateTokens.text();
       console.error("API route error response:", errorText);
