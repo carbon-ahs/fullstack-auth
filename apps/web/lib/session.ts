@@ -1,50 +1,30 @@
 "use server";
 
-import { jwtVerify, SignJWT } from "jose";
-import { ENCODED_SECRET_KEY, SESSION_SECRET_KEY } from "@/lib/constants";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import {
+  SESSION_COOKIE_NAME,
+  SESSION_COOKIE_OPTIONS,
+  signSession,
+  verifySessionToken,
+  type Session,
+} from "@/lib/session-jwt";
 
-export type Session = {
-  user: {
-    id: string;
-    name: string;
-  };
-  accessToken: string;
-  refreshToken: string;
-};
+export type { Session } from "@/lib/session-jwt";
 
 export async function createSession(payload: Session) {
-  const seven_days_in_millisecond = 7 * 24 * 60 * 60 * 1000;
-  const expiredAt = new Date(Date.now() + seven_days_in_millisecond);
+  const session = await signSession(payload);
 
-  const session = await new SignJWT(payload)
-    .setProtectedHeader({
-      alg: "HS256",
-    })
-    .setIssuedAt()
-    .setExpirationTime("7d")
-    .sign(ENCODED_SECRET_KEY);
-
-  (await cookies()).set("session", session, {
-    httpOnly: true,
-    secure: true,
-    expires: expiredAt,
-    sameSite: "lax",
-    path: "/",
-  });
+  (await cookies()).set(SESSION_COOKIE_NAME, session, SESSION_COOKIE_OPTIONS);
 }
 
 export async function getSession() {
-  const cookie = (await cookies()).get("session")?.value;
+  const cookie = (await cookies()).get(SESSION_COOKIE_NAME)?.value;
   if (!cookie) {
     return null;
   }
   try {
-    const { payload } = await jwtVerify(cookie, ENCODED_SECRET_KEY, {
-      algorithms: ["HS256"],
-    });
-    return payload as Session;
+    return await verifySessionToken(cookie);
   } catch (error) {
     console.error("Failed To varify:" + error);
     redirect("/auth/signin");
@@ -52,7 +32,7 @@ export async function getSession() {
 }
 
 export async function deleteSession() {
-  (await cookies()).delete("session");
+  (await cookies()).delete(SESSION_COOKIE_NAME);
 }
 
 export async function updateTokensV0({
@@ -62,14 +42,11 @@ export async function updateTokensV0({
   accessToken: string;
   refreshToken: string;
 }) {
-  const cookieSession = (await cookies()).get("session")?.value;
+  const cookieSession = (await cookies()).get(SESSION_COOKIE_NAME)?.value;
   if (!cookieSession) {
     return null;
   }
-  const { payload } = await jwtVerify<Session>(
-    cookieSession,
-    ENCODED_SECRET_KEY,
-  );
+  const payload = await verifySessionToken(cookieSession);
 
   if (!payload) {
     throw new Error("Could not find session");
@@ -93,16 +70,13 @@ export async function updateTokens({
   accessToken: string;
   refreshToken: string;
 }) {
-  const cookieSession = (await cookies()).get("session")?.value;
+  const cookieSession = (await cookies()).get(SESSION_COOKIE_NAME)?.value;
 
   if (!cookieSession) {
     throw new Error("Session cookie is missing");
   }
 
-  const { payload } = await jwtVerify<Session>(
-    cookieSession,
-    ENCODED_SECRET_KEY,
-  );
+  const payload = await verifySessionToken(cookieSession);
 
   if (!payload) {
     throw new Error("Could not find session");

@@ -1,10 +1,10 @@
 "use server";
 
 import { FormState, LoginFormSchema, SignupFormSchema } from "@/lib/type";
-import { APP_URL, BACKEND_URL } from "@/lib/constants";
+import { BACKEND_URL } from "@/lib/constants";
 import { redirect } from "next/navigation";
 import { createSession, updateTokens } from "@/lib/session";
-import { cookies } from "next/headers";
+import { requestTokenRefresh } from "@/lib/session-jwt";
 
 export async function signUp(
   state: FormState,
@@ -74,51 +74,19 @@ export async function signIn(
   }
 }
 
+/**
+ * Refresh the backend tokens and persist them in the session cookie.
+ *
+ * This writes a cookie, so it only works from a Server Action or a Route
+ * Handler. Automatic refresh during page rendering is handled by `proxy.ts`,
+ * which is the only place that can safely persist a rotated refresh token
+ * while a Server Component is rendering.
+ */
 export const refreshToken = async (oldRefreshToken: string) => {
   try {
-    const response = await fetch(`${BACKEND_URL}/auth/refresh`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ refresh: oldRefreshToken }),
-    });
-
-    if (!response.ok) {
-      throw new Error("Backend refresh failed: " + response.statusText);
-    }
-
-    const { accessToken, refreshToken } = await response.json();
-
-    const updateTokens = await fetch(`${APP_URL}/api/auth/update`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ accessToken, refreshToken }),
-    });
-
-    // const sessionCookie = (await cookies()).get("session")?.value;
-
-    // if (!sessionCookie) {
-    //   throw new Error("Session cookie not found in current request.");
-    // }
-    //
-    // const updateTokens = await fetch(`${APP_URL}/api/auth/update`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Cookie: `session=${sessionCookie}`,
-    //   },
-    //   body: JSON.stringify({ accessToken, refreshToken }),
-    //   cache: "no-store",
-    // });
-    console.log(updateTokens);
-    if (!updateTokens.ok) {
-      const errorText = await updateTokens.text();
-      console.error("API route error response:", errorText);
-
-      throw new Error(
-        `Session update failed (${updateTokens.status}): ${updateTokens.statusText}`,
-      );
-    }
-    return accessToken;
+    const tokens = await requestTokenRefresh(oldRefreshToken);
+    await updateTokens(tokens);
+    return tokens.accessToken;
   } catch (error) {
     console.error("Token refresh error: ", error);
     return null;
