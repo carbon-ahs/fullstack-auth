@@ -1,0 +1,144 @@
+[
+  {
+    "id": "createNativeEnumType.FilePurpose",
+    "label": "Create enum type \"FilePurpose\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "type",
+        "name": "FilePurpose"
+      }
+    },
+    "precheck": [],
+    "execute": [
+      {
+        "description": "create enum type \"FilePurpose\"",
+        "sql": "CREATE TYPE \"public\".\"FilePurpose\" AS ENUM ('STUDENT_IMPORT', 'PROFILE_IMAGE', 'DOCUMENT')",
+        "params": []
+      }
+    ],
+    "postcheck": []
+  },
+  {
+    "id": "table.UploadedFile",
+    "label": "Create table \"UploadedFile\"",
+    "summary": "Creates table \"UploadedFile\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "UploadedFile"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"UploadedFile\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"UploadedFile\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"UploadedFile\"",
+        "sql": "CREATE TABLE \"public\".\"UploadedFile\" (\n  \"createdAt\" timestamp(3) DEFAULT (now()) NOT NULL,\n  \"id\" SERIAL NOT NULL,\n  \"mimeType\" text NOT NULL,\n  \"originalName\" text NOT NULL,\n  \"purpose\" \"FilePurpose\" NOT NULL,\n  \"size\" int4 NOT NULL,\n  \"storageKey\" text NOT NULL,\n  CONSTRAINT \"UploadedFile_pkey\" PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"UploadedFile\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"UploadedFile\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unique.UploadedFile.UploadedFile_storageKey_key",
+    "label": "Add unique constraint on \"UploadedFile\" (storageKey)",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "unique",
+        "name": "UploadedFile_storageKey_key",
+        "table": "UploadedFile"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"UploadedFile_storageKey_key\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "UploadedFile_storageKey_key",
+          "public",
+          "\"public\".\"UploadedFile\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add unique constraint \"UploadedFile_storageKey_key\"",
+        "sql": "ALTER TABLE \"public\".\"UploadedFile\" ADD CONSTRAINT \"UploadedFile_storageKey_key\" UNIQUE (\"storageKey\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify constraint \"UploadedFile_storageKey_key\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "UploadedFile_storageKey_key",
+          "public",
+          "\"public\".\"UploadedFile\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.UploadedFile.UploadedFile_purpose_idx_73d3df4c",
+    "label": "Create index \"UploadedFile_purpose_idx_73d3df4c\" on \"UploadedFile\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "UploadedFile_purpose_idx_73d3df4c",
+        "table": "UploadedFile"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"UploadedFile_purpose_idx_73d3df4c\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"UploadedFile_purpose_idx_73d3df4c\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"UploadedFile_purpose_idx_73d3df4c\"",
+        "sql": "CREATE INDEX \"UploadedFile_purpose_idx_73d3df4c\" ON \"public\".\"UploadedFile\" (\"purpose\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"UploadedFile_purpose_idx_73d3df4c\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"UploadedFile_purpose_idx_73d3df4c\""
+        ]
+      }
+    ]
+  }
+]
