@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'node:crypto';
-import { mkdir, rm, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { StorageProvider, StoredFile, UploadFile } from './storage.provider.js';
 
@@ -49,5 +49,11 @@ export class LocalStorageService implements StorageProvider {
     }
 
     return resolvedPath;
+  }
+
+  async read(key: string): Promise<Buffer> {
+    const absolutePath = this.resolveInsideRoot(key);
+
+    return readFile(absolutePath);
   }
 }

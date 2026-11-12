@@ -14,7 +14,7 @@ model Category {
 
 model User {
   id                 Int       @id(map: "User_pkey") @default(autoincrement())
-  email              String    @unique
+  email              String
   name               String
   password           String
   hashedRefreshToken String?
@@ -57,4 +57,24 @@ ADMIN = "ADMIN"
 EDITOR = "EDITOR"
 USER = "USER"
 }
+
+model UploadedFile {
+id           Int       @id(map: "UploadedFile_pkey") @default(autoincrement())
+originalName String
+storageKey   String    @unique
+mimeType     String
+size         Int
+purpose      pg.enum(FilePurpose)
+createdAt    TimestampString(3) @default(now())
+
+@@index([purpose])
+}
+
+native_enum FilePurpose {
+STUDENT_IMPORT = "STUDENT_IMPORT"
+PROFILE_IMAGE  = "PROFILE_IMAGE"
+DOCUMENT       = "DOCUMENT"
+}
+
+
 }

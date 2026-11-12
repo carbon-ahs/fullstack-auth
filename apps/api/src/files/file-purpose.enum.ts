@@ -1,0 +1,5 @@
+export enum FilePurpose {
+  STUDENT_IMPORT = 'STUDENT_IMPORT',
+  PROFILE_IMAGE = 'PROFILE_IMAGE',
+  DOCUMENT = 'DOCUMENT',
+}

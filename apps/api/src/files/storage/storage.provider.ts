@@ -13,6 +13,6 @@ export interface StoredFile {
 
 export interface StorageProvider {
   save(file: UploadFile, folder: string): Promise<StoredFile>;
-
+  read(key: string): Promise<Buffer>;
   delete(key: string): Promise<void>;
 }
