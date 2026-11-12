@@ -123,4 +123,20 @@ openssl rand -base64 32
 npm i passport-jwt
 npm i -D @types/passport-jwt
 
+
+# CSV perser
+npm install csv-parser
+npm install --save-dev @types/multer
+
+# file module
+nest g module files
+nest g controller files
+nest g service files
 ```
+
+## Story
+
+### Story 1
+- user want to upload file. 
+Task breakdown
+- 
