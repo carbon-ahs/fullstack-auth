@@ -132,11 +132,17 @@ npm install --save-dev @types/multer
 nest g module files
 nest g controller files
 nest g service files
+
+
+nest g service students --no-spec --flat
+nest g class students/dto/import-students.dto --no-spec --flat
+nest g class students/dto/find-students-query.dto --no-spec --flat
 ```
 
 ## Story
 
 ### Story 1
-- user want to upload file. 
-Task breakdown
+
+- user want to upload file.
+  Task breakdown
 - 

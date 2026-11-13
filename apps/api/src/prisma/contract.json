@@ -16,6 +16,10 @@
       "model": "Post",
       "namespace": "public"
     },
+    "Student": {
+      "model": "Student",
+      "namespace": "public"
+    },
     "UploadedFile": {
       "model": "UploadedFile",
       "namespace": "public"
@@ -64,12 +68,8 @@
               "posts": {
                 "cardinality": "1:N",
                 "on": {
-                  "localFields": [
-                    "slug"
-                  ],
-                  "targetFields": [
-                    "catSlug"
-                  ]
+                  "localFields": ["slug"],
+                  "targetFields": ["catSlug"]
                 },
                 "to": {
                   "model": "Post",
@@ -142,12 +142,8 @@
                 "cardinality": "N:1",
                 "nullable": false,
                 "on": {
-                  "localFields": [
-                    "postId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
+                  "localFields": ["postId"],
+                  "targetFields": ["id"]
                 },
                 "to": {
                   "model": "Post",
@@ -158,12 +154,8 @@
                 "cardinality": "N:1",
                 "nullable": false,
                 "on": {
-                  "localFields": [
-                    "userId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
+                  "localFields": ["userId"],
+                  "targetFields": ["id"]
                 },
                 "to": {
                   "model": "User",
@@ -267,12 +259,8 @@
                 "cardinality": "N:1",
                 "nullable": false,
                 "on": {
-                  "localFields": [
-                    "catSlug"
-                  ],
-                  "targetFields": [
-                    "slug"
-                  ]
+                  "localFields": ["catSlug"],
+                  "targetFields": ["slug"]
                 },
                 "to": {
                   "model": "Category",
@@ -282,12 +270,8 @@
               "comments": {
                 "cardinality": "1:N",
                 "on": {
-                  "localFields": [
-                    "id"
-                  ],
-                  "targetFields": [
-                    "postId"
-                  ]
+                  "localFields": ["id"],
+                  "targetFields": ["postId"]
                 },
                 "to": {
                   "model": "Comment",
@@ -298,12 +282,8 @@
                 "cardinality": "N:1",
                 "nullable": false,
                 "on": {
-                  "localFields": [
-                    "userEmail"
-                  ],
-                  "targetFields": [
-                    "email"
-                  ]
+                  "localFields": ["userEmail"],
+                  "targetFields": ["email"]
                 },
                 "to": {
                   "model": "User",
@@ -343,6 +323,57 @@
               },
               "namespaceId": "public",
               "table": "Post"
+            }
+          },
+          "Student": {
+            "fields": {
+              "cadetNumber": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "classLevel": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "fields": {
+                "cadetNumber": {
+                  "column": "cadetNumber"
+                },
+                "classLevel": {
+                  "column": "classLevel"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "name": {
+                  "column": "name"
+                }
+              },
+              "namespaceId": "public",
+              "table": "Student"
             }
           },
           "UploadedFile": {
@@ -484,12 +515,8 @@
               "comments": {
                 "cardinality": "1:N",
                 "on": {
-                  "localFields": [
-                    "id"
-                  ],
-                  "targetFields": [
-                    "userId"
-                  ]
+                  "localFields": ["id"],
+                  "targetFields": ["userId"]
                 },
                 "to": {
                   "model": "Comment",
@@ -499,12 +526,8 @@
               "posts": {
                 "cardinality": "1:N",
                 "on": {
-                  "localFields": [
-                    "email"
-                  ],
-                  "targetFields": [
-                    "userEmail"
-                  ]
+                  "localFields": ["email"],
+                  "targetFields": ["userEmail"]
                 },
                 "to": {
                   "model": "Post",
@@ -548,20 +571,12 @@
           "native_enum": {
             "FilePurpose": {
               "kind": "postgres-enum",
-              "members": [
-                "STUDENT_IMPORT",
-                "PROFILE_IMAGE",
-                "DOCUMENT"
-              ],
+              "members": ["STUDENT_IMPORT", "PROFILE_IMAGE", "DOCUMENT"],
               "typeName": "FilePurpose"
             },
             "Role": {
               "kind": "postgres-enum",
-              "members": [
-                "ADMIN",
-                "EDITOR",
-                "USER"
-              ],
+              "members": ["ADMIN", "EDITOR", "USER"],
               "typeName": "Role"
             }
           },
@@ -596,17 +611,13 @@
               "foreignKeys": [],
               "indexes": [
                 {
-                  "columns": [
-                    "slug"
-                  ],
+                  "columns": ["slug"],
                   "name": "Category_slug_key",
                   "unique": true
                 }
               ],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ],
+                "columns": ["id"],
                 "name": "Category_pkey"
               },
               "uniques": []
@@ -654,16 +665,12 @@
                 {
                   "name": "comments_author_id_users_id_fk",
                   "source": {
-                    "columns": [
-                      "user_id"
-                    ],
+                    "columns": ["user_id"],
                     "namespaceId": "public",
                     "tableName": "Comment"
                   },
                   "target": {
-                    "columns": [
-                      "id"
-                    ],
+                    "columns": ["id"],
                     "namespaceId": "public",
                     "tableName": "User"
                   }
@@ -671,16 +678,12 @@
                 {
                   "name": "comments_post_id_posts_id_fk",
                   "source": {
-                    "columns": [
-                      "post_id"
-                    ],
+                    "columns": ["post_id"],
                     "namespaceId": "public",
                     "tableName": "Comment"
                   },
                   "target": {
-                    "columns": [
-                      "id"
-                    ],
+                    "columns": ["id"],
                     "namespaceId": "public",
                     "tableName": "Post"
                   }
@@ -688,9 +691,7 @@
               ],
               "indexes": [],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ],
+                "columns": ["id"],
                 "name": "Comment_pkey"
               },
               "uniques": []
@@ -764,16 +765,12 @@
                   "onDelete": "restrict",
                   "onUpdate": "cascade",
                   "source": {
-                    "columns": [
-                      "catSlug"
-                    ],
+                    "columns": ["catSlug"],
                     "namespaceId": "public",
                     "tableName": "Post"
                   },
                   "target": {
-                    "columns": [
-                      "slug"
-                    ],
+                    "columns": ["slug"],
                     "namespaceId": "public",
                     "tableName": "Category"
                   }
@@ -783,16 +780,12 @@
                   "onDelete": "restrict",
                   "onUpdate": "cascade",
                   "source": {
-                    "columns": [
-                      "userEmail"
-                    ],
+                    "columns": ["userEmail"],
                     "namespaceId": "public",
                     "tableName": "Post"
                   },
                   "target": {
-                    "columns": [
-                      "email"
-                    ],
+                    "columns": ["email"],
                     "namespaceId": "public",
                     "tableName": "User"
                   }
@@ -800,18 +793,55 @@
               ],
               "indexes": [
                 {
-                  "columns": [
-                    "slug"
-                  ],
+                  "columns": ["slug"],
                   "name": "Post_slug_key",
                   "unique": true
                 }
               ],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ],
+                "columns": ["id"],
                 "name": "Post_pkey"
+              },
+              "uniques": []
+            },
+            "Student": {
+              "columns": {
+                "cadetNumber": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": false
+                },
+                "classLevel": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "nullable": false
+                },
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nullable": false
+                },
+                "name": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "columns": ["cadetNumber"],
+                  "name": "Student_cadetNumber_key",
+                  "unique": true
+                }
+              ],
+              "primaryKey": {
+                "columns": ["id"],
+                "name": "Student_pkey"
               },
               "uniques": []
             },
@@ -876,25 +906,19 @@
               "foreignKeys": [],
               "indexes": [
                 {
-                  "columns": [
-                    "purpose"
-                  ],
+                  "columns": ["purpose"],
                   "name": "UploadedFile_purpose_idx_73d3df4c",
                   "prefix": "UploadedFile_purpose_idx",
                   "unique": false
                 }
               ],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ],
+                "columns": ["id"],
                 "name": "UploadedFile_pkey"
               },
               "uniques": [
                 {
-                  "columns": [
-                    "storageKey"
-                  ]
+                  "columns": ["storageKey"]
                 }
               ]
             },
@@ -951,17 +975,13 @@
               "foreignKeys": [],
               "indexes": [
                 {
-                  "columns": [
-                    "email"
-                  ],
+                  "columns": ["email"],
                   "name": "User_email_key",
                   "unique": true
                 }
               ],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ],
+                "columns": ["id"],
                 "name": "User_pkey"
               },
               "uniques": []
@@ -970,19 +990,11 @@
           "valueSet": {
             "FilePurpose": {
               "kind": "valueSet",
-              "values": [
-                "STUDENT_IMPORT",
-                "PROFILE_IMAGE",
-                "DOCUMENT"
-              ]
+              "values": ["STUDENT_IMPORT", "PROFILE_IMAGE", "DOCUMENT"]
             },
             "Role": {
               "kind": "valueSet",
-              "values": [
-                "ADMIN",
-                "EDITOR",
-                "USER"
-              ]
+              "values": ["ADMIN", "EDITOR", "USER"]
             }
           }
         },
@@ -990,7 +1002,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "601f3e0cd909a027e2d85ad2d3c88b3683ebaaa338eec809074d03bcb28b5c3c"
+    "storageHash": "aa2bf176a9523e08a1104562bc6eb8b073fa7dbb4a843c29c4a00ed84c18e34f"
   },
   "capabilities": {
     "postgres": {

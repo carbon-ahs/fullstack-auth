@@ -17,8 +17,6 @@ import {
 } from './storage/storage.provider.js';
 import { PrismaService } from '../prisma/prisma.service.js';
 
-
-
 const MAX_MB = 1024 * 1024;
 
 const UPLOAD_RULES = {
@@ -164,12 +162,17 @@ export class FilesService {
 
     try {
       const buffer = await this.storage.read(file.storageKey);
-
       return {
         buffer,
         originalName: file.originalName,
         mimeType: file.mimeType,
+        purpose: file.purpose,
       };
+      // return {
+      //   buffer,
+      //   originalName: file.originalName,
+      //   mimeType: file.mimeType,
+      // };
     } catch (error) {
       if (
         typeof error === 'object' &&

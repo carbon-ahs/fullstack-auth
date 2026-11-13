@@ -1,0 +1,26 @@
+info:
+  name: students-import
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: http://localhost:8000/students/import
+  headers:
+    - name: Authorization
+      value: Bearer    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsImlhdCI6MTc5Mjc1MzY1OSwiZXhwIjoxNzkyNzUzNzE5fQ.j7gtYFHfBBUJbd0UH8FKVNlYZbkAEXqWAFOl9yZTt1Q
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+        "fileId": 1
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

@@ -72,8 +72,18 @@ createdAt    TimestampString(3) @default(now())
 
 native_enum FilePurpose {
 STUDENT_IMPORT = "STUDENT_IMPORT"
-PROFILE_IMAGE  = "PROFILE_IMAGE"
-DOCUMENT       = "DOCUMENT"
+PROFILE_IMAGE = "PROFILE_IMAGE"
+DOCUMENT = "DOCUMENT"
+}
+
+
+model Student {
+id          Int    @id(map: "Student_pkey") @default(autoincrement())
+name        String
+cadetNumber String
+classLevel  Int
+
+@@index([cadetNumber], map: "Student_cadetNumber_key", unique: true)
 }
 
 

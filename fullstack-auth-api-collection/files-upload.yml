@@ -16,7 +16,7 @@ http:
       - name: file
         type: file
         value:
-          - F:\codebase__root\js__root\fullstack-auth\project-static-assets\students.csv
+          - E:\codebase__root\js\fullstack-auth\project-static-assets\students.csv
         contentType: text/csv; charset=utf-8
   auth: inherit
 

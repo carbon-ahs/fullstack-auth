@@ -1,0 +1,72 @@
+[
+  {
+    "id": "table.Student",
+    "label": "Create table \"Student\"",
+    "summary": "Creates table \"Student\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "Student"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Student\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"Student\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Student\"",
+        "sql": "CREATE TABLE \"public\".\"Student\" (\n  \"cadetNumber\" text NOT NULL,\n  \"classLevel\" int4 NOT NULL,\n  \"id\" SERIAL NOT NULL,\n  \"name\" text NOT NULL,\n  CONSTRAINT \"Student_pkey\" PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Student\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"Student\""]
+      }
+    ]
+  },
+  {
+    "id": "index.Student.Student_cadetNumber_key",
+    "label": "Create index \"Student_cadetNumber_key\" on \"Student\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "Student_cadetNumber_key",
+        "table": "Student"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"Student_cadetNumber_key\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"Student_cadetNumber_key\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"Student_cadetNumber_key\"",
+        "sql": "CREATE UNIQUE INDEX \"Student_cadetNumber_key\" ON \"public\".\"Student\" (\"cadetNumber\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"Student_cadetNumber_key\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"Student_cadetNumber_key\""]
+      }
+    ]
+  }
+]
