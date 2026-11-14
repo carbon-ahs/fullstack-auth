@@ -60,12 +60,8 @@
               "posts": {
                 "cardinality": "1:N",
                 "on": {
-                  "localFields": [
-                    "slug"
-                  ],
-                  "targetFields": [
-                    "catSlug"
-                  ]
+                  "localFields": ["slug"],
+                  "targetFields": ["catSlug"]
                 },
                 "to": {
                   "model": "Post",
@@ -138,12 +134,8 @@
                 "cardinality": "N:1",
                 "nullable": false,
                 "on": {
-                  "localFields": [
-                    "postId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
+                  "localFields": ["postId"],
+                  "targetFields": ["id"]
                 },
                 "to": {
                   "model": "Post",
@@ -154,12 +146,8 @@
                 "cardinality": "N:1",
                 "nullable": false,
                 "on": {
-                  "localFields": [
-                    "userId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
+                  "localFields": ["userId"],
+                  "targetFields": ["id"]
                 },
                 "to": {
                   "model": "User",
@@ -263,12 +251,8 @@
                 "cardinality": "N:1",
                 "nullable": false,
                 "on": {
-                  "localFields": [
-                    "catSlug"
-                  ],
-                  "targetFields": [
-                    "slug"
-                  ]
+                  "localFields": ["catSlug"],
+                  "targetFields": ["slug"]
                 },
                 "to": {
                   "model": "Category",
@@ -278,12 +262,8 @@
               "comments": {
                 "cardinality": "1:N",
                 "on": {
-                  "localFields": [
-                    "id"
-                  ],
-                  "targetFields": [
-                    "postId"
-                  ]
+                  "localFields": ["id"],
+                  "targetFields": ["postId"]
                 },
                 "to": {
                   "model": "Comment",
@@ -294,12 +274,8 @@
                 "cardinality": "N:1",
                 "nullable": false,
                 "on": {
-                  "localFields": [
-                    "userEmail"
-                  ],
-                  "targetFields": [
-                    "email"
-                  ]
+                  "localFields": ["userEmail"],
+                  "targetFields": ["email"]
                 },
                 "to": {
                   "model": "User",
@@ -393,12 +369,8 @@
               "comments": {
                 "cardinality": "1:N",
                 "on": {
-                  "localFields": [
-                    "id"
-                  ],
-                  "targetFields": [
-                    "userId"
-                  ]
+                  "localFields": ["id"],
+                  "targetFields": ["userId"]
                 },
                 "to": {
                   "model": "Comment",
@@ -408,12 +380,8 @@
               "posts": {
                 "cardinality": "1:N",
                 "on": {
-                  "localFields": [
-                    "email"
-                  ],
-                  "targetFields": [
-                    "userEmail"
-                  ]
+                  "localFields": ["email"],
+                  "targetFields": ["userEmail"]
                 },
                 "to": {
                   "model": "Post",
@@ -457,11 +425,7 @@
           "native_enum": {
             "Role": {
               "kind": "postgres-enum",
-              "members": [
-                "ADMIN",
-                "EDITOR",
-                "USER"
-              ],
+              "members": ["ADMIN", "EDITOR", "USER"],
               "typeName": "Role"
             }
           },
@@ -496,17 +460,13 @@
               "foreignKeys": [],
               "indexes": [
                 {
-                  "columns": [
-                    "slug"
-                  ],
+                  "columns": ["slug"],
                   "name": "Category_slug_key",
                   "unique": true
                 }
               ],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ],
+                "columns": ["id"],
                 "name": "Category_pkey"
               },
               "uniques": []
@@ -554,16 +514,12 @@
                 {
                   "name": "comments_author_id_users_id_fk",
                   "source": {
-                    "columns": [
-                      "user_id"
-                    ],
+                    "columns": ["user_id"],
                     "namespaceId": "public",
                     "tableName": "Comment"
                   },
                   "target": {
-                    "columns": [
-                      "id"
-                    ],
+                    "columns": ["id"],
                     "namespaceId": "public",
                     "tableName": "User"
                   }
@@ -571,16 +527,12 @@
                 {
                   "name": "comments_post_id_posts_id_fk",
                   "source": {
-                    "columns": [
-                      "post_id"
-                    ],
+                    "columns": ["post_id"],
                     "namespaceId": "public",
                     "tableName": "Comment"
                   },
                   "target": {
-                    "columns": [
-                      "id"
-                    ],
+                    "columns": ["id"],
                     "namespaceId": "public",
                     "tableName": "Post"
                   }
@@ -588,9 +540,7 @@
               ],
               "indexes": [],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ],
+                "columns": ["id"],
                 "name": "Comment_pkey"
               },
               "uniques": []
@@ -664,16 +614,12 @@
                   "onDelete": "restrict",
                   "onUpdate": "cascade",
                   "source": {
-                    "columns": [
-                      "catSlug"
-                    ],
+                    "columns": ["catSlug"],
                     "namespaceId": "public",
                     "tableName": "Post"
                   },
                   "target": {
-                    "columns": [
-                      "slug"
-                    ],
+                    "columns": ["slug"],
                     "namespaceId": "public",
                     "tableName": "Category"
                   }
@@ -683,16 +629,12 @@
                   "onDelete": "restrict",
                   "onUpdate": "cascade",
                   "source": {
-                    "columns": [
-                      "userEmail"
-                    ],
+                    "columns": ["userEmail"],
                     "namespaceId": "public",
                     "tableName": "Post"
                   },
                   "target": {
-                    "columns": [
-                      "email"
-                    ],
+                    "columns": ["email"],
                     "namespaceId": "public",
                     "tableName": "User"
                   }
@@ -700,17 +642,13 @@
               ],
               "indexes": [
                 {
-                  "columns": [
-                    "slug"
-                  ],
+                  "columns": ["slug"],
                   "name": "Post_slug_key",
                   "unique": true
                 }
               ],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ],
+                "columns": ["id"],
                 "name": "Post_pkey"
               },
               "uniques": []
@@ -766,26 +704,14 @@
                 }
               },
               "foreignKeys": [],
-              "indexes": [
-                {
-                  "columns": [
-                    "email"
-                  ],
-                  "name": "User_email_key",
-                  "unique": true
-                }
-              ],
+              "indexes": [],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ],
+                "columns": ["id"],
                 "name": "User_pkey"
               },
               "uniques": [
                 {
-                  "columns": [
-                    "email"
-                  ]
+                  "columns": ["email"]
                 }
               ]
             }
@@ -793,11 +719,7 @@
           "valueSet": {
             "Role": {
               "kind": "valueSet",
-              "values": [
-                "ADMIN",
-                "EDITOR",
-                "USER"
-              ]
+              "values": ["ADMIN", "EDITOR", "USER"]
             }
           }
         },
@@ -805,7 +727,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "930083171dd7dc35d1d92c66365afee864e833d426ade6e26c9e1cd84d05a3b3"
+    "storageHash": "4f0d81f95212f6592486aade3513e05056883d6f9fc150e091632fbf11b18310"
   },
   "capabilities": {
     "postgres": {

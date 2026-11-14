@@ -14,6 +14,7 @@ export class UserService {
 
     return await this.prisma.db.orm.public.User.create({
       password: hashedPassword,
+      hashedRefreshToken: null,
       ...user,
     });
   }
@@ -42,7 +43,10 @@ export class UserService {
     }).first();
   }
 
-  async updateHashedRefreshToken(userId: number, hashedRefreshToken: string | null) {
+  async updateHashedRefreshToken(
+    userId: number,
+    hashedRefreshToken: string | null,
+  ) {
     return this.prisma.db.orm.public.User.where({ id: userId }).update({
       hashedRefreshToken,
     });
