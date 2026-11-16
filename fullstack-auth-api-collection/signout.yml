@@ -1,0 +1,19 @@
+info:
+  name: signout
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: http://localhost:8000/auth/signout
+  headers:
+    - name: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsImlhdCI6MTc5NDg1MTg5MCwiZXhwIjoxNzk0OTM4MjkwfQ.DmYsmnAzuf_J80WxOcerBTfVHcDQCCxwFGvcnCJj8Jk
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
