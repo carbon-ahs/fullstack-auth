@@ -10,6 +10,8 @@ import { ConfigModule } from '@nestjs/config';
 import { JwtStrategy } from './strategies/jwt.strategy.js';
 import refreshConfig from './config/refresh.config.js';
 import { RefreshStrategy } from './strategies/refreshToken.strategy.js';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './guards/jwt-auth/jwt-auth.guard.js';
 
 @Module({
   imports: [
@@ -25,6 +27,11 @@ import { RefreshStrategy } from './strategies/refreshToken.strategy.js';
     LocalStrategy,
     JwtStrategy,
     RefreshStrategy,
+
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard, // Passing @UseGuards(JwtAuthGuard) in all over the application
+    },
   ],
 })
 export class AuthModule {}
